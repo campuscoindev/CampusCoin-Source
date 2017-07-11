@@ -1,0 +1,9 @@
+Building CampusCoin
+
+See doc/readme-qt.rst for instructions on building CampusCoin-Qt,
+the intended-for-end-users, nice-graphical-interface, reference
+implementation of CampusCoin.
+
+See doc/build-*.txt for instructions on building CampusCoind,
+the intended-for-services, no-graphical-interface, reference
+implementation of CampusCoin.
