@@ -1,2 +1,10 @@
+CampusCoin Source Code for Wallet Version 1.2.0.1
+
 rpc port: 28199
 net port: 28195
+
+Version 1.2.0.1: Block Reward switched from 500/block to 1500/block, set at block 210,000, changes total supply from 2 billion to 1.01 billion.
+
+Version 1.1.0.1: Block Reward switched from 500/block to 1500/block, set at block 100,000, block reward halving changed to every 1 million blocks, changes total supply from 2 billion to 1.2 billion. (Never implemented)
+
+Version 1.0.0.1: Original Wallet, Block Reward set to 1500/block, halving every 600,000 blocks
