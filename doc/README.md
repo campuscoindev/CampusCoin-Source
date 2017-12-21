@@ -1,8 +1,8 @@
-CampusCoin 0.8.x BETA
+CampusCoin 1.2.0.1
 ====================
 
 Copyright (c) 2009-2013 Bitcoin Developers
-Copyright (c) 2011-2013 CampusCoin Developers
+Copyright (c) 2013-2017 CampusCoin Developers
 
 Distributed under the MIT/X11 software license, see the accompanying
 file COPYING or http://www.opensource.org/licenses/mit-license.php.
