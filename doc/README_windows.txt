@@ -1,4 +1,4 @@
-CampusCoin 1.2.01
+CampusCoin 1.2.0.1
 
 Copyright (c) 2009-2013 Bitcoin Developers
 Copyright (c) 2013-2017 CampusCoin Developers
