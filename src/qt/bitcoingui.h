@@ -76,6 +76,7 @@ protected:
     bool eventFilter(QObject *object, QEvent *event);
 
 private:
+    QToolBar *toolbar;
     ClientModel *clientModel;
     WalletFrame *walletFrame;
 

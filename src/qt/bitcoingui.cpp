@@ -70,6 +70,11 @@ BitcoinGUI::BitcoinGUI(QWidget *parent) :
     prevBlocks(0)
 {
     restoreWindowGeometry();
+    setSizePolicy(QSizePolicy::Minimum,QSizePolicy::Minimum);
+    //resize(800,520);
+    setMinimumSize(950,560);
+    setMaximumSize(950,560);
+
     setWindowTitle(tr("CampusCoin") + " - " + tr("Wallet"));
 #ifndef Q_OS_MAC
     QApplication::setWindowIcon(QIcon(":icons/bitcoin"));
@@ -107,11 +112,20 @@ BitcoinGUI::BitcoinGUI(QWidget *parent) :
     // Create status bar
     statusBar();
 
+    // Disable size grip because it looks ugly and nobody needs it
+    //statusBar()->setSizeGripEnabled(false);
+
     // Status bar notification icons
     QFrame *frameBlocks = new QFrame();
+    frameBlocks->setStyleSheet("QFrame::pane { border: 0; }");//myfix noborder
     frameBlocks->setContentsMargins(0,0,0,0);
     frameBlocks->setMinimumWidth(56);
-    frameBlocks->setMaximumWidth(56);
+    frameBlocks->setMaximumWidth(100);
+    frameBlocks->setFrameShape(QFrame::NoFrame);
+    frameBlocks->setLineWidth(0);
+    //frameBlocks->setSizePolicy(QSizePolicy::Preferred, QSizePolicy::Preferred);
+    //frameBlocks->setStyleSheet("QWidget { background: none; margin-bottom: 5px; }");
+
     QHBoxLayout *frameBlocksLayout = new QHBoxLayout(frameBlocks);
     frameBlocksLayout->setContentsMargins(3,0,3,0);
     frameBlocksLayout->setSpacing(3);
@@ -173,35 +187,40 @@ void BitcoinGUI::createActions()
 {
     QActionGroup *tabGroup = new QActionGroup(this);
 
-    overviewAction = new QAction(QIcon(":/icons/overview"), tr("&Summary"), this);
+    //overviewAction = new QAction(QIcon(":/icons/overview"), tr("&Summary"), this);
+    overviewAction = new QAction(tr("&My Wallet"), this);
     overviewAction->setStatusTip(tr("Show general overview of wallet"));
     overviewAction->setToolTip(overviewAction->statusTip());
     overviewAction->setCheckable(true);
     overviewAction->setShortcut(QKeySequence(Qt::ALT + Qt::Key_1));
     tabGroup->addAction(overviewAction);
 
-    sendCoinsAction = new QAction(QIcon(":/icons/send"), tr("&Send Coins"), this);
+    //sendCoinsAction = new QAction(QIcon(":/icons/send"), tr("&Send Coins"), this);
+    sendCoinsAction = new QAction(tr("&Send"), this);
     sendCoinsAction->setStatusTip(tr("Send coins to a CampusCoin address"));
     sendCoinsAction->setToolTip(sendCoinsAction->statusTip());
     sendCoinsAction->setCheckable(true);
     sendCoinsAction->setShortcut(QKeySequence(Qt::ALT + Qt::Key_2));
     tabGroup->addAction(sendCoinsAction);
 
-    receiveCoinsAction = new QAction(QIcon(":/icons/receiving_addresses"), tr("&Receive Coins"), this);
+    //receiveCoinsAction = new QAction(QIcon(":/icons/receiving_addresses"), tr("&Receive Coins"), this);
+    receiveCoinsAction = new QAction(tr("&Receive"), this);
     receiveCoinsAction->setStatusTip(tr("Show the list of addresses for receiving payments"));
     receiveCoinsAction->setToolTip(receiveCoinsAction->statusTip());
     receiveCoinsAction->setCheckable(true);
     receiveCoinsAction->setShortcut(QKeySequence(Qt::ALT + Qt::Key_3));
     tabGroup->addAction(receiveCoinsAction);
 
-    historyAction = new QAction(QIcon(":/icons/history"), tr("&Transactions"), this);
+    //historyAction = new QAction(QIcon(":/icons/history"), tr("&Transactions"), this);
+    historyAction = new QAction(tr("&Transactions"), this);
     historyAction->setStatusTip(tr("Browse transaction history"));
     historyAction->setToolTip(historyAction->statusTip());
     historyAction->setCheckable(true);
     historyAction->setShortcut(QKeySequence(Qt::ALT + Qt::Key_4));
     tabGroup->addAction(historyAction);
 
-    addressBookAction = new QAction(QIcon(":/icons/address-book"), tr("&Address Book"), this);
+    //addressBookAction = new QAction(QIcon(":/icons/address-book"), tr("&Address Book"), this);
+    addressBookAction = new QAction(tr("&Addresses"), this);
     addressBookAction->setStatusTip(tr("Edit the list of stored addresses and labels for sending"));
     addressBookAction->setToolTip(addressBookAction->statusTip());
     addressBookAction->setCheckable(true);
@@ -293,15 +312,74 @@ void BitcoinGUI::createMenuBar()
     help->addAction(aboutQtAction);
 }
 
+//myfix
 void BitcoinGUI::createToolBars()
 {
-    QToolBar *toolbar = addToolBar(tr("Tabs toolbar"));
-    toolbar->setToolButtonStyle(Qt::ToolButtonTextBesideIcon);
+    toolbar = addToolBar(tr("Tabs toolbar"));
+    //toolbar->setToolButtonStyle(Qt::ToolButtonTextBesideIcon);
+
+    toolbar->setObjectName("tabs");
+    toolbar->setStyleSheet("QToolButton { color: #ffffff; font-size: 15px; font-weight: 400; font-family: 'Verdana'; padding: 5px; padding-left: 8px; border: none;}"
+		"QToolButton:hover { background-color: #02b571; border: none; padding-top: 5px; padding-bottom: 5px; }"
+		"QToolButton:checked { background-color: #02b571; border: none; padding-top: 5px; padding-bottom: 5px; }"
+		"QToolButton:pressed { background-color: #02b571; border: none; padding-top: 5px; padding-bottom: 5px; }"
+		"#tabs { color: #000000; background-color: #008e56; border: none; padding-top: 0px; padding-bottom: 0px; }");
+
+    QLabel* header = new QLabel();
+    header->setMinimumSize(160, 100);
+    header->setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed);
+    header->setPixmap(QPixmap(":/images/header"));
+    header->setScaledContents(false);
+    header->setObjectName("header");
+    header->setStyleSheet("#header { border: none; }");
+    toolbar->addWidget(header);
+
     toolbar->addAction(overviewAction);
     toolbar->addAction(sendCoinsAction);
     toolbar->addAction(receiveCoinsAction);
     toolbar->addAction(historyAction);
     toolbar->addAction(addressBookAction);
+
+    QWidget* spacer = new QWidget();
+    spacer->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
+    spacer->setStyleSheet("QWidget { background: none; }");
+    toolbar->addWidget(spacer);
+    toolbar->setOrientation(Qt::Vertical);
+    toolbar->setMovable(false);
+/*
+	QLabel* donate = new QLabel();
+    donate->setMinimumSize(160, 20);
+    donate->setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed);
+    donate->setText(tr("  Donate"));
+    donate->setScaledContents(false);
+    donate->setObjectName("header");
+    donate->setStyleSheet("#header { border: none; }");
+    donate->addWidget(header);
+
+    QLabel* footer = new QLabel();
+    footer->setMinimumSize(160, 180);
+    footer->setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed);
+    footer->setPixmap(QPixmap(":/images/footer"));
+    footer->setScaledContents(false);
+    footer->setObjectName("footer");
+    footer->setStyleSheet("#footer { border: none; }");
+    toolbar->addWidget(footer);
+*/
+    addToolBar(Qt::LeftToolBarArea, toolbar);
+
+
+    QLayout* lay = toolbar->layout();
+
+    foreach(QAction *action, toolbar->actions()) {
+ 	toolbar->widgetForAction(action)->setFixedWidth(160);
+//toolbar->widgetForAction(action)->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
+//        lay->setAlignment(toolbar->widgetForAction(action),Qt::AlignRight);
+    }
+
+    for(int i = 0; i < lay->count(); ++i){
+        lay->itemAt(i)->setAlignment(Qt::AlignRight);
+    }
+
 }
 
 void BitcoinGUI::setClientModel(ClientModel *clientModel)
@@ -525,7 +603,8 @@ void BitcoinGUI::setNumConnections(int count)
     case 7: case 8: case 9: icon = ":/icons/connect_3"; break;
     default: icon = ":/icons/connect_4"; break;
     }
-    labelConnectionsIcon->setPixmap(QIcon(icon).pixmap(STATUSBAR_ICONSIZE,STATUSBAR_ICONSIZE));
+    //labelConnectionsIcon->setPixmap(QIcon(icon).pixmap(STATUSBAR_ICONSIZE,STATUSBAR_ICONSIZE));
+    labelConnectionsIcon->setPixmap(QIcon(icon).pixmap(20,STATUSBAR_ICONSIZE));
     labelConnectionsIcon->setToolTip(tr("%n active connection(s) to CampusCoin network", "", count));
 }
 

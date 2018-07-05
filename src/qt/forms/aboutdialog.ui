@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>593</width>
+    <width>1007</width>
     <height>360</height>
    </rect>
   </property>
@@ -114,7 +114,12 @@ This is experimental software.
 
 Distributed under the MIT/X11 software license, see the accompanying file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-This product includes software developed by the OpenSSL Project for use in the OpenSSL Toolkit (http://www.openssl.org/) and cryptographic software written by Eric Young (eay@cryptsoft.com) and UPnP software written by Thomas Bernard.</string>
+This product includes software developed by the OpenSSL Project for use in the OpenSSL Toolkit (http://www.openssl.org/) and cryptographic software written by Eric Young (eay@cryptsoft.com) and UPnP software written by Thomas Bernard.
+
+Donate
+CMPCO: CSKYyacmzvcKRbq5F8cWDY52o5gHT7tCGc
+BTC:      14mAo1wicxf9E4XtbmRkNx7wBiWYj9dnK8
+LTC:       LgnhP7rse9tuWQsrRvz9pR947M8LeZooq8</string>
        </property>
        <property name="wordWrap">
         <bool>true</bool>
