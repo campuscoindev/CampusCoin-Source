@@ -1,7 +1,9 @@
-CampusCoin Source Code for Wallet Version 1.2.0.1
+CampusCoin Source Code for Wallet Version 2.0.0.1
 
 rpc port: 28199
 net port: 28195
+
+Version 2.0.0.1: Updated interface, Updated Libraries and Security Updates.
 
 Version 1.2.0.1: Block Reward switched from 1500/block to 500/block, set at block 210,000, changes total supply from 2 billion to 1.01 billion.
 
