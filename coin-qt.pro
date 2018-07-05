@@ -1,7 +1,7 @@
 TEMPLATE = app
 TARGET = CampusCoin-qt
 macx:TARGET = "CampusCoin-Qt"
-VERSION = 1.2.0.1
+VERSION = 2.0.0.1
 INCLUDEPATH += src src/json src/qt
 QT += network
 DEFINES += QT_GUI BOOST_THREAD_USE_LIB BOOST_SPIRIT_THREADSAFE
