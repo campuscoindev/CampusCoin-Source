@@ -13,13 +13,9 @@ src/test_litecoin
 
 # Compilation and Qt preprocessor part
 *.qm
-Makefile
-litecoin-qt
-Litecoin-Qt.app
 
 # Unit-tests
 Makefile.test
-litecoin-qt_test
 
 # Resources cpp
 qrc_*.cpp
@@ -31,4 +27,3 @@ qrc_*.cpp
 .DS_Store
 build
 
-!src/leveldb-*/Makefile
