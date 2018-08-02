@@ -10,11 +10,12 @@ sudo apt-get install libqrencode-dev
 
 mkdir /root/CampusCoin
 cd /root/CampusCoin
-wget https://github.com/campuscoindev/CampusCoin-Source/files/2166332/Ubuntu-Qt-Update.tar.gz
-echo "Uncompressing..."
+echo "****************     Copying...  *****************"
+wget https://github.com/campuscoindev/CampusCoin-Source/files/2252535/Ubuntu-Qt-Update.tar.gz
+echo "**************** Uncompressing...*****************"
 tar -xvzf Ubuntu-Qt-Update.tar.gz
-sleep 20
+sleep 2
 rm Ubuntu-Qt-Update.tar.gz
 chmod +x CampusCoind
 chmod +x CampusCoin-qt
-echo "Job completed successfully, please run /root/CampusCoin/CampusCoin-qt"
+echo "****************Job completed successfully, please run /root/CampusCoin/CampusCoin-qt"
